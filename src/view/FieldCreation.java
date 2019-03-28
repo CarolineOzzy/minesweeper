@@ -1,8 +1,7 @@
 package view;
 
 import model.Matrix;
-import model.Sound1;
-import model.Sound2;
+import model.Sound;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class FieldCreation {
+
+    private String status;
 
     public void mouseEvent(JButton jButton) {
         jButton.addMouseListener(new MouseListener() {
@@ -58,19 +59,17 @@ public class FieldCreation {
                         buttonArray.get((i * 8) + j).setIcon(new ImageIcon("src/resources/bomber.png"));
                     else
                         buttonArray.get((i * 8) + j).setEnabled(false);
-
-                    Sound1 defeat = new Sound1();
-
+            status = "defeat";
+            sendStatus(status);
         });
-
     }
 
     //when bomb is around
-    public void bombAround(JButton jButton,Matrix m, ArrayList<JButton> buttonArray, int c) {
+    public void bombAround(JButton jButton, Matrix m, ArrayList<JButton> buttonArray, int c) {
         jButton.addActionListener((ActionEvent e) -> {
             jButton.setLabel(String.valueOf(c));
             jButton.setContentAreaFilled(false);
-            checkVictory(buttonArray,m);
+            checkVictory(buttonArray, m);
         });
     }
 
@@ -78,10 +77,10 @@ public class FieldCreation {
     public void noBomb(JButton jButton, Matrix m, ArrayList<JButton> buttonArray, int x, int y) {
         jButton.addActionListener((ActionEvent e) -> {
             jButton.setContentAreaFilled(false);
-            m.searchForZeroes(x,y);
+            m.searchForZeroes(x, y);
             m.printMatrix();
-            for (int i = 0; i<8 ;i++)
-                for (int j = 0; j< 8; j++) {
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++) {
                     if (m.getValueAt(i, j) == -2) {
                         buttonArray.get(i * 8 + j).setContentAreaFilled(false);
                     } else if (m.getValueAt(i, j) >= 9 && m.getValueAt(i, j) <= 16) {
@@ -90,24 +89,25 @@ public class FieldCreation {
                         buttonArray.get(i * 8 + j).setContentAreaFilled(false);
                     }
                 }
-            checkVictory(buttonArray,m);
-
+            checkVictory(buttonArray, m);
         });
     }
 
-
     //check victory
-    void checkVictory (ArrayList<JButton> buttonArray, Matrix m){
+    private void checkVictory(ArrayList<JButton> buttonArray, Matrix m) {
         int cont = 0;
-        for (JButton a : buttonArray){
+        for (JButton a : buttonArray) {
             if (a.isContentAreaFilled())
                 cont++;
         }
         if (cont == m.getmMines()) {
             System.out.print("YOU WIN\n\n");
-            Sound2 victory = new Sound2();
-            return;
+            status = "victory";
+            sendStatus(status);
         }
-        return;
+    }
+
+    private void sendStatus(String status) {
+        new Sound(status);
     }
 }

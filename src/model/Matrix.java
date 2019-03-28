@@ -14,6 +14,7 @@ public class Matrix {
         this.placeMines();
         this.calculateHints();
     }
+
     // Creating the 8x8 matrix
     public void createMatrix() {
         mMinefield = new int[size][size];
@@ -32,6 +33,7 @@ public class Matrix {
             }
         }
     }
+
     // This puts the hints on the board
     public void calculateHints() {
         for (int y = 0; y < size; y++) {
@@ -67,102 +69,106 @@ public class Matrix {
     }
 
 
-    public boolean isHint (int x, int y){
+    public boolean isHint(int x, int y) {
         if (this.mMinefield[x][y] >= 1 && this.mMinefield[x][y] <= 8)
             return true;
         return false;
     }
 
-    public boolean isBomb (int x, int y){
+    public boolean isBomb(int x, int y) {
         if (this.mMinefield[x][y] == -1)
             return true;
         return false;
     }
 
-    public boolean isNothing (int x, int y){
+    public boolean isNothing(int x, int y) {
         if (this.mMinefield[x][y] == 0)
             return true;
         return false;
     }
 
-    public boolean isValidCoord (int x, int y){
-        if (x >= 0 && x < 8 && y >= 0 && y <8)
+    public boolean isValidCoord(int x, int y) {
+        if (x >= 0 && x < 8 && y >= 0 && y < 8)
             return true;
         return false;
     }
-    public int getValueAt (int x, int y){
+
+    public int getValueAt(int x, int y) {
         return this.mMinefield[x][y];
     }
 
-    public int getmMines (){
+    public int getmMines() {
         return mMines;
     }
 
-    public void searchForZeroes (int x, int y){
+    public void searchForZeroes(int x, int y) {
         this.mMinefield[x][y] = -2;
-        if (this.isValidCoord(x-1,y-1)){
-            if (this.isNothing(x-1,y-1))
-                this.searchForZeroes(x-1,y-1);
-            else if (this.mMinefield[x-1][y-1] >= 0 && this.mMinefield[x-1][y-1] <= 8)
-                this.mMinefield[x-1][y-1] += 8;
+        if (this.isValidCoord(x - 1, y - 1)) {
+            if (this.isNothing(x - 1, y - 1))
+                this.searchForZeroes(x - 1, y - 1);
+            else if (this.mMinefield[x - 1][y - 1] >= 0 && this.mMinefield[x - 1][y - 1] <= 8)
+                this.mMinefield[x - 1][y - 1] += 8;
         }
-        if (this.isValidCoord(x,y-1)){
-            if (this.isNothing(x,y-1))
-                this.searchForZeroes(x,y-1);
-            else if (this.mMinefield[x][y-1] >= 0 && this.mMinefield[x][y-1] <= 8)
-                this.mMinefield[x][y-1] += 8;
+        if (this.isValidCoord(x, y - 1)) {
+            if (this.isNothing(x, y - 1))
+                this.searchForZeroes(x, y - 1);
+            else if (this.mMinefield[x][y - 1] >= 0 && this.mMinefield[x][y - 1] <= 8)
+                this.mMinefield[x][y - 1] += 8;
         }
-        if (this.isValidCoord(x+1,y-1)){
-            if (this.isNothing(x+1,y-1))
-                this.searchForZeroes(x+1,y-1);
-            else if (this.mMinefield[x+1][y-1] >= 0 && this.mMinefield[x+1][y-1] <= 8)
-                this.mMinefield[x+1][y-1] += 8;
+        if (this.isValidCoord(x + 1, y - 1)) {
+            if (this.isNothing(x + 1, y - 1))
+                this.searchForZeroes(x + 1, y - 1);
+            else if (this.mMinefield[x + 1][y - 1] >= 0 && this.mMinefield[x + 1][y - 1] <= 8)
+                this.mMinefield[x + 1][y - 1] += 8;
         }
-        if (this.isValidCoord(x-1,y)){
-            if (this.isNothing(x-1,y))
-                this.searchForZeroes(x-1,y);
-            else if (this.mMinefield[x-1][y] >= 0 && this.mMinefield[x-1][y] <= 8)
-                this.mMinefield[x-1][y] += 8;
+        if (this.isValidCoord(x - 1, y)) {
+            if (this.isNothing(x - 1, y))
+                this.searchForZeroes(x - 1, y);
+            else if (this.mMinefield[x - 1][y] >= 0 && this.mMinefield[x - 1][y] <= 8)
+                this.mMinefield[x - 1][y] += 8;
         }
-        if (this.isValidCoord(x+1,y)){
-            if (this.isNothing(x+1,y))
-                this.searchForZeroes(x+1,y);
-            else if (this.mMinefield[x+1][y] >= 0 && this.mMinefield[x+1][y] <= 8)
-                this.mMinefield[x+1][y] += 8;
+        if (this.isValidCoord(x + 1, y)) {
+            if (this.isNothing(x + 1, y))
+                this.searchForZeroes(x + 1, y);
+            else if (this.mMinefield[x + 1][y] >= 0 && this.mMinefield[x + 1][y] <= 8)
+                this.mMinefield[x + 1][y] += 8;
         }
-        if (this.isValidCoord(x-1,y+1)){
-            if (this.isNothing(x-1,y+1))
-                this.searchForZeroes(x-1,y+1);
-            else if (this.mMinefield[x-1][y+1] >= 0 && this.mMinefield[x-1][y+1] <= 8)
-                this.mMinefield[x-1][y+1] += 8;
+        if (this.isValidCoord(x - 1, y + 1)) {
+            if (this.isNothing(x - 1, y + 1))
+                this.searchForZeroes(x - 1, y + 1);
+            else if (this.mMinefield[x - 1][y + 1] >= 0 && this.mMinefield[x - 1][y + 1] <= 8)
+                this.mMinefield[x - 1][y + 1] += 8;
         }
-        if (this.isValidCoord(x,y+1)){
-            if (this.isNothing(x,y+1))
-                this.searchForZeroes(x,y+1);
-            else if (this.mMinefield[x][y+1] >= 0 && this.mMinefield[x][y+1] <= 8)
-                this.mMinefield[x][y+1] += 8;
+        if (this.isValidCoord(x, y + 1)) {
+            if (this.isNothing(x, y + 1))
+                this.searchForZeroes(x, y + 1);
+            else if (this.mMinefield[x][y + 1] >= 0 && this.mMinefield[x][y + 1] <= 8)
+                this.mMinefield[x][y + 1] += 8;
         }
-        if (this.isValidCoord(x+1,y+1)){
-            if (this.isNothing(x+1,y+1))
-                this.searchForZeroes(x+1,y+1);
-            else if (this.mMinefield[x+1][y+1] >= 0 && this.mMinefield[x+1][y+1] <= 8)
-                this.mMinefield[x+1][y+1] += 8;
+        if (this.isValidCoord(x + 1, y + 1)) {
+            if (this.isNothing(x + 1, y + 1))
+                this.searchForZeroes(x + 1, y + 1);
+            else if (this.mMinefield[x + 1][y + 1] >= 0 && this.mMinefield[x + 1][y + 1] <= 8)
+                this.mMinefield[x + 1][y + 1] += 8;
         }
     }
 
-    public void setValueBack (int x, int y){
+    public void setValueBack(int x, int y) {
         this.mMinefield[x][y] -= 8;
     }
 
-    public void printMatrix (){
+    public void printMatrix() {
         System.out.print('\n');
-        for (int i = 0; i< 8; i++) {
+        for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (this.mMinefield[i][j] == -1)
                     System.out.print("B ");
                 else if (this.mMinefield[i][j] == -2)
                     System.out.print("A ");
-                else {System.out.print(this.mMinefield[i][j]); System.out.print(' ');}
+                else {
+                    System.out.print(this.mMinefield[i][j]);
+                    System.out.print(' ');
+                }
             }
             System.out.print('\n');
         }

@@ -12,7 +12,7 @@ public class MainWindowLayout {
 
     public MainWindowLayout() {
         JFrame mainWindow = new JFrame("Minesweeper");
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainWindow.setResizable(false);
 
         //Layouts and definitions
@@ -32,7 +32,7 @@ public class MainWindowLayout {
         //Header
         //Reset Button
         ResetGame resetGame = new ResetGame();
-        resetGame.resetar(resetGameButton, mainWindow);
+        resetGame.reset(resetGameButton, mainWindow);
 
         resetGameButton.setIcon(new ImageIcon("src/resources/reset.png"));
         resetGameButton.setBorder(BorderFactory.createEmptyBorder());
@@ -55,12 +55,12 @@ public class MainWindowLayout {
                 buttonArray.add(itemButtonField);
 
                 fieldCreation.mouseEvent(itemButtonField);
-                if (m.isHint(row,column))
-                    fieldCreation.bombAround(itemButtonField,m, buttonArray,m.getValueAt(row, column));
-                if (m.isNothing(row,column))
-                    fieldCreation.noBomb(itemButtonField,m,buttonArray,row,column);
-                if (m.isBomb(row,column))
-                   fieldCreation.bomb(itemButtonField,buttonArray,m);
+                if (m.isHint(row, column))
+                    fieldCreation.bombAround(itemButtonField, m, buttonArray, m.getValueAt(row, column));
+                if (m.isNothing(row, column))
+                    fieldCreation.noBomb(itemButtonField, m, buttonArray, row, column);
+                if (m.isBomb(row, column))
+                    fieldCreation.bomb(itemButtonField, buttonArray, m);
             }
         }
 

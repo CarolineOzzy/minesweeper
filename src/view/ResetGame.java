@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class ResetGame {
 
-    public void resetar(JButton jButton, JFrame jFrame) {
+    public void reset(JButton jButton, JFrame jFrame) {
         jButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jFrame.dispose();
